@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>RunningKuma&#39;s basement</title>
+        <subtitle>杂物存放处</subtitle>
+        <icon>https://runningkuma.github.io/assets/favicon.ico</icon>
+        <link>https://runningkuma.github.io</link>
+        <author>
+          <name>RunningKuma</name>
+        </author>
+        <description></description>
+        <language>zh-cn</language>
+        <pubDate>Thu, 13 Mar 2025 14:48:48 +0800</pubDate>
+        <lastBuildDate>Thu, 13 Mar 2025 14:48:48 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">https://runningkuma.github.io/2025/03/13/new-step/</guid>
+            <title>hexo建站小记</title>
+            <link>https://runningkuma.github.io/2025/03/13/new-step/</link>
+            <category term="new start" scheme="https://runningkuma.github.io/tags/new-start/" />
+            <pubDate>Thu, 13 Mar 2025 14:48:48 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;之前有尝试使用过白嫖阿里云服务器部署 WordPress，用宝塔面板部署镜像等等，但那个时候对于网络前后端啥的一无所知，现在学了一点点知识了，就用这个建站当实践吧&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;那些学了又忘，忘了又学的东西，应该好好记下来&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;step1建站&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step1建站&#34;&gt;#&lt;/a&gt; Step1：建站&lt;/h2&gt;
+&lt;p&gt;若你的世界一无所有，请先获得改造世界的工具：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装 git&lt;/li&gt;
+&lt;li&gt;安装 Node.js&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;必备程序安装完后，使用 npm 包管理安装 Hexo&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt; hexo-cli&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;%% 可局部安装hexo包 %%&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; hexo&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;PATH=&#34;$PATH:./node_modules/.bin&#34;&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&lt;/span&gt; ~/.profile&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; npx hexo &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;command&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;使用以下命令在 Hexo 文件夹新建所需文件：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;hexo init &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;folder&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;  &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;folder&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;  &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;初始化后，您的项目文件夹将如下所示&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;config.yml&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;网站的 &lt;a href=&#34;https://hexo.io/zh-cn/docs/configuration&#34;&gt;配置&lt;/a&gt; 文件。 您可以在此配置大部分的参数，很重要。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;package.json&lt;/strong&gt;&lt;br /&gt;
+ 应用程序的信息。 &lt;a href=&#34;https://ejs.co/&#34;&gt;EJS&lt;/a&gt;, &lt;a href=&#34;http://learnboost.github.io/stylus/&#34;&gt;Stylus&lt;/a&gt; 和 &lt;a href=&#34;http://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt; 渲染引擎 已默认安装，您可以自由移除。 如果您想，可以稍后卸载它们。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;scaffolds&lt;/strong&gt;&lt;br /&gt;
+【模版](&lt;a href=&#34;https://hexo.io/zh-cn/docs/writing#%E6%A8%A1%E7%89%88%EF%BC%88Scaffold%EF%BC%89&#34;&gt;https://hexo.io/zh-cn/docs/writing# 模版（Scaffold）&lt;/a&gt;) 文件夹。 当您新建文章时，Hexo 会根据 scaffold 来创建文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;source&lt;/strong&gt;&lt;br /&gt;
+ 资源文件夹。 是存放用户资源的地方。 除  &lt;code&gt;_posts&lt;/code&gt;  文件夹之外，开头命名为  &lt;code&gt;_&lt;/code&gt;  (下划线) 的文件 / 文件夹和隐藏的文件将会被忽略。 Markdown 和 HTML 文件会被解析并放到  &lt;code&gt;public&lt;/code&gt;  文件夹，而其他文件会被拷贝过去。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;themes&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&#34;https://hexo.io/zh-cn/docs/themes&#34;&gt; 主题&lt;/a&gt; 文件夹。 Hexo 会根据主题来生成静态页面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;hexo clean &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; hexo generate &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; hexo sever&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;你应该可以使用&lt;a href=&#34;http://localhost:4000/&#34;&gt; http://localhost:4000/&lt;/a&gt; 来查看本地网页&lt;br /&gt;
+如果想要部署到 github 上，请看后文&lt;/p&gt;
+&lt;h2 id=&#34;step2安装主题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step2安装主题&#34;&gt;#&lt;/a&gt; Step2：安装主题&lt;/h2&gt;
+&lt;p&gt;我们选用 ShokaX，一个已经停止维护的 Shoka 主题的精神续作，有着非常好的文档和 [中文配置教程](&lt;a href=&#34;https://hexo.docs.shokax.top/getting-started/&#34;&gt;安装 ShokaX | ShokaX Docs&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;要注意一下如果 pnpm 报错 &lt;code&gt;ERR_PNPM_NO_GLOBAL_BIN_DIR Unable to find the global bin directory&lt;/code&gt;  就跟着指引 pnpm setup 就好，然后开个&lt;strong&gt;新终端&lt;/strong&gt;重新输入命令&lt;/p&gt;
+&lt;p&gt;在最后一步创建软连接的时候，如果你是 Windows 用户并且用 powershell，请使用：&lt;/p&gt;
+&lt;figure class=&#34;highlight powershell&#34;&gt;&lt;figcaption data-lang=&#34;PowerShell&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;cmd &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;c mklink &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;J &lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;\themes\shokax &lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;\node_modules\hexo-theme-shokax&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;s&gt;如果不想折磨自己还是建议用开箱即食 can，自己配置很容易有各种奇奇怪怪问题浪费时间&lt;/s&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step3配置githubio&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step3配置githubio&#34;&gt;#&lt;/a&gt; Step3：&lt;a href=&#34;http://xn--github-2x9px75i.io&#34;&gt;配置 github.io&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;修改_config.yml 中的 deploy 项：&lt;/p&gt;
+&lt;figure class=&#34;highlight yml&#34;&gt;&lt;figcaption data-lang=&#34;YAML&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;deploy&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token key atrule&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; git&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token key atrule&#34;&gt;repo&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &amp;lt;your repo&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token key atrule&#34;&gt;branch&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; master&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;然后使用 &lt;code&gt;hexo clean ; hexo d -g&lt;/code&gt; ，登录你在 github 上的网站进行测试。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;github 部署后图片看不见了？&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因为图片源挂了，我们可以修改./source/_data 自定义网站图片，见后文&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;一些简单的 hexo 命令&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hexo g / hexo generate&lt;/code&gt; ：在 hexo 站点根目录下生成 public 文件夹&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hexo clean&lt;/code&gt; ：把 &lt;code&gt;public&lt;/code&gt;  文件夹删除&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hexo s&lt;/code&gt;  或 &lt;code&gt;hexo server&lt;/code&gt; ：启动服务，默认地址为&lt;a href=&#34;http://localhost:4000/%EF%BC%8C4000%E7%AB%AF%E5%8F%A3&#34;&gt; http://localhost:4000/，4000 端口&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hexo d&lt;/code&gt;  或 &lt;code&gt;hexo deploy&lt;/code&gt;  ：部署站点，在本地生成 &lt;code&gt;.deploy_git&lt;/code&gt;  文件夹，并将编译后的文件上传至 GitHub。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hexo new [layout] &amp;lt;title&amp;gt;&lt;/code&gt; ：Hexo 会尝试在 scaffolds 中寻找 [layout].md 布局，若找到，则根据该布局新建文章；若未找到或指令中未指定该参数，则使用 post.md 新建文章。新建文章的名称在_config.yml 中配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;step4主题配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#step4主题配置&#34;&gt;#&lt;/a&gt; Step4：主题配置&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;除非特殊说明，以下配置均在  &lt;code&gt;/_config.shokax.yml&lt;/code&gt;  或  &lt;code&gt;/_config.shokaX.yml&lt;/code&gt;  文件中修改&lt;br /&gt;
+来自官方文档：&lt;a href=&#34;https://docs.kaitaku.xyz/guide/theme.html&#34;&gt;主题配置 | Hexo-theme-ShokaX&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;先在_config.shokax.yml 中加入静态资源：&lt;/p&gt;
+&lt;figure class=&#34;highlight yml&#34;&gt;&lt;figcaption data-lang=&#34;YAML&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;alternate&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &amp;lt;name&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#!!! 一定要设置，不然一直是 test，折腾了好久！！！&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;statics&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/&#34;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 静态文件根目录，可用于 CDN 加速&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;assets&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;assets&#34;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 图片资源存放目录&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;css&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;css&#34;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# css 存放目录 (不建议改动)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;js&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;js&#34;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# js 存放目录 (不建议改动)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;自定义图片&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#自定义图片&#34;&gt;#&lt;/a&gt; 自定义图片：&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;在 Hexo 的根目录  &lt;code&gt;/source&lt;/code&gt;  文件夹下；&lt;/li&gt;
+&lt;li&gt;进入  &lt;code&gt;/_data&lt;/code&gt;  目录（如果没有则创建）；&lt;/li&gt;
+&lt;li&gt;根据  &lt;code&gt;/_config.shokax.yml&lt;/code&gt;  或  &lt;code&gt;/_config.shokaX.yml&lt;/code&gt;  中自定义的图片目录（如  &lt;code&gt;assets&lt;/code&gt;  ），在  &lt;code&gt;_data&lt;/code&gt;  目录下创建对应的目录。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;不同的文件名称分别代表对应的图片，文件名严格对应。
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;avatar.jpg&lt;/code&gt;  默认情况下对应主页上的个人头像，可修改&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;favicon.ico&lt;/code&gt;  网站图标&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apple-touch-icon.png&lt;/code&gt;  将网页链接添加到主屏幕时的图标&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;failure.ico&lt;/code&gt;  网站被隐藏时的网站图标&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;alipay.png&lt;/code&gt;  支付宝捐赠付款码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wechatpay.png&lt;/code&gt;  微信捐赠收款码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;paypal.png&lt;/code&gt;  PayPal 捐赠收款码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;search.png&lt;/code&gt;  搜索下显示的图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;自定义网站轮播图&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#自定义网站轮播图&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://docs.kaitaku.xyz/guide/theme.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E7%AB%99%E8%BD%AE%E6%92%AD%E5%9B%BE&#34;&gt;自定义网站轮播图&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;在上面的  &lt;code&gt;_data&lt;/code&gt;  目录下创建  &lt;code&gt;images.yml&lt;/code&gt; ；&lt;/li&gt;
+&lt;li&gt;在文件内存入轮播图图片即可替换原本自带的轮播图；&lt;/li&gt;
+&lt;li&gt;类似如下，可存入图床当中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;- https://i.imgtg.com/2023/03/09/YS2LU.jpg
+- https://i.imgtg.com/2023/03/09/YSj7p.jpg
+- https://i.imgtg.com/2023/03/09/YS6XY.jpg
+- https://i.imgtg.com/2023/03/09/YSIlc.jpg
+- https://i.imgtg.com/2023/03/09/YQSYM.jpg
+- https://i.imgtg.com/2023/03/09/Y0xvg.jpg
+- https://i.imgtg.com/2023/03/09/Y0iNK.jpg
+- https://i.imgtg.com/2023/03/09/Y0zdB.jpg
+- https://i.imgtg.com/2023/03/09/Y0kTl.jpg
+- https://i.imgtg.com/2023/03/09/Y0hOs.jpg
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;自 0.3.7 版本开始，ShokaX 允许主页和文章使用不同的图片源： 以下文件中以 &lt;code&gt;_&lt;/code&gt; 开头的为主题文件夹下，其他均为 &lt;code&gt;source/_data&lt;/code&gt;  目录下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;images_index.yml&lt;/code&gt;  为首页图片源文件，如果主题文件夹下存在 &lt;code&gt;_images_index.yml&lt;/code&gt; ，则会使用主题文件夹下的文件，否则使用 &lt;code&gt;source/_data/images_index.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;images.yml&lt;/code&gt;  为通用图片源文件，作为首页的后备图片源和文章的图片源。如果未找到 &lt;code&gt;images.yml&lt;/code&gt; ，则会使用主题文件夹下的 &lt;code&gt;_images.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;后面还有很多选择，就不赘述了。&lt;/p&gt;
+&lt;h2 id=&#34;总之踩坑的还是蛮多的以为很简单的事情结果耗掉了一中午目前还是只半成品-之后有时间再来完善下这篇&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#总之踩坑的还是蛮多的以为很简单的事情结果耗掉了一中午目前还是只半成品-之后有时间再来完善下这篇&#34;&gt;#&lt;/a&gt; 总之踩坑的还是蛮多的，以为很简单的事情结果耗掉了一中午，目前还是只半成品。之后有时间再来完善下这篇&lt;/h2&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://runningkuma.github.io/2025/03/13/hello-world/</guid>
+            <title>Hello World</title>
+            <link>https://runningkuma.github.io/2025/03/13/hello-world/</link>
+            <pubDate>Thu, 13 Mar 2025 14:39:02 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
+&lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo new &lt;span class=&#34;token string&#34;&gt;&#34;My New Post&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/writing.html&#34;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;run-server&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#run-server&#34;&gt;#&lt;/a&gt; Run server&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo server&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/server.html&#34;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;generate-static-files&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#generate-static-files&#34;&gt;#&lt;/a&gt; Generate static files&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo generate&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/generating.html&#34;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;deploy-to-remote-sites&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#deploy-to-remote-sites&#34;&gt;#&lt;/a&gt; Deploy to remote sites&lt;/h3&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ hexo deploy&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
