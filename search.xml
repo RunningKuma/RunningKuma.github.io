@@ -33,82 +33,6 @@
       </tags>
   </entry>
   <entry>
-    <title>计网扫盲与速通</title>
-    <url>/2025/04/03/network/</url>
-    <content><![CDATA[<p>先祭出七层和五层模型：<br>![](&#x2F;images&#x2F;network&#x2F;Pasted image 20250301102247.jpg)</p>
-<h2 id="物理层（网线与电子元件在这一层）"><a href="#物理层（网线与电子元件在这一层）" class="headerlink" title="物理层（网线与电子元件在这一层）"></a>物理层（网线与电子元件在这一层）</h2><p>通用有线网网卡插口为RJ45，连接线为双绞线</p>
-<ul>
-<li>交叉线：相同类型设备连接，线序不同，一端水晶头为 568A 另一端为 568B（568B 线序：橙白&#x2F;橙&#x2F;绿白&#x2F;蓝&#x2F;蓝白&#x2F;绿&#x2F;棕白&#x2F;棕</li>
-<li>直通线：不同类型设备连接，两端都是568B<br>类型分类：CAT 1-7；CAT 5：100Mbits&#x2F;s（百兆线）;CAT6:1000Mbits&#x2F;s（千兆线）CAT-7：10000Mbits&#x2F;s</li>
-</ul>
-<h2 id="链路层（网口，MAC在这一层）"><a href="#链路层（网口，MAC在这一层）" class="headerlink" title="链路层（网口，MAC在这一层）"></a>链路层（网口，MAC在这一层）</h2><p>传输数据为以太网帧</p>
-<blockquote>
-<p>一帧会以一系列规定好的前导比特序列开始，用来告知一帧的开始和同步通信双方速率（可以理解成同步时钟）。之后就是以太网帧的正式内容。<br><strong>注意，在链路上的所有计算机都可以侦听到传输的以太网帧</strong></p>
-</blockquote>
-<p>MAC地址（xx:xx:xx:xx:xx:xx）：用来确定数据是否发给自己的,如果不是就丢弃，否则就接收，并将数据存放到缓冲区，或者 DMA 到内存中，并发出一个<strong>硬件中断</strong>通知 CPU 自己收到了数据</p>
-<ul>
-<li><strong>广播地址</strong>：FF:FF:FF:FF:FF:FF</li>
-<li><strong>组播地址</strong>：01:xx:xx:xx:xx:xx<br>  这俩接受到都会认为是发送给自己的，具体区别网络层再说</li>
-</ul>
-<p><strong>MAC 地址是在链路层中寻址的根据。</strong><br>交换机如何知道哪个端口是哪个 MAC 地址：<strong>MAC 地址表</strong>（记录地址&lt;&#x3D;&#x3D;&gt;物理网口，有自学习机制，可以记录数据帧与端口的对应）</p>
-<p><strong>广播风暴</strong>：若多个交换机形成环路会引发广播风暴，要配置<strong>生成树</strong>协议避免环路形成（图论最有用的一集）</p>
-<h2 id="网络层（主机，IP协议在这一层）"><a href="#网络层（主机，IP协议在这一层）" class="headerlink" title="网络层（主机，IP协议在这一层）"></a>网络层（主机，IP协议在这一层）</h2><p>为什么需要IP：互相通信的两个网口，可能在链路层上没有直接连接到一起，这时候就需要另外一层协议来连接这些不同的<strong>子网</strong>（链路层上可以直接互相通信的网络），可以使用tcpdump来抓包。<br>![](&#x2F;images&#x2F;network&#x2F;Pasted image 20250301104404.png)<br><strong>子网掩码</strong>：<strong>子网掩码</strong>中二进制位为 1 代表对应的地址中的位为<strong>网络号</strong>，为 0 代表对应的地址中的位为<strong>主机号。</strong> 由前半段连续的1与后半段连续的0组成，<strong>1之前不能出现0</strong>，他定义了一个子网里可以有多少机器。</p>
-<blockquote>
-<p>例：255.255.255.0&lt;&#x3D;&#x3D;&gt;11111111.11111111.11111111.00000000<br>子网的网络号有 24 位长，主机号有 8 位长，可以放下 256 - 2 &#x3D; 254 台主机<br>对于IP：192.168.1.233 255.255.255.0 可以写成 192.168.1.233&#x2F;24，后面的 24 意思是子网掩码前 24 位是 1 后面全 0。这种方法叫 CIDR 表示法。</p>
-</blockquote>
-<p>不同的程序进行通信需要使用端口号来进行识别，如果说IP是房子那么端口就是房子的门，由 Internet 端口号分配机构（Internet Assigned Numbers Authority，IANA）来管理，编号 0 ～ 1023 为 <strong>系统端口号</strong>（系统保留）,编号 1024 ～ 49151 为<strong>登记端口号</strong>(登记使用），编号 49152 ～ 65535 为<strong>短暂端口号</strong>（短暂使用，用完释放）常见的端口即协议对应按照下面展示：</p>
-<ul>
-<li>SSH 22</li>
-<li>FTP 20 和 21</li>
-<li>Telnet 23</li>
-<li>SMTP 25</li>
-<li>TFTP 69</li>
-<li>HTTP 80</li>
-<li>SNMP 161</li>
-<li>Ping 使用 ICMP，无具体端口号</li>
-</ul>
-<p>接下来对于网络通信非常重要的两个表</p>
-<h3 id="路由表"><a href="#路由表" class="headerlink" title="路由表"></a>路由表</h3><p>准备发送 IP 包的时候，会去查询路由表，长下面这样子：<br>![](&#x2F;images&#x2F;network&#x2F;Pasted image 20250301110031.png]]</p>
-<p>传送路径：查路由表&#x3D;&#x3D;&gt;匹配后看下一跳&#x3D;&#x3D;&gt;如果是在链路上&#x2F;onlink（同一子网）：直接发局域网后转发；如果是IP地址：封装一个目的 IP 是原来的目的地址的 IP 包，下一跳 IP 设备对应的 MAC 地址的以太网帧，发送到局域网内（这就是路由）&#x3D;&#x3D;&gt;到下一跳后重复执行</p>
-<p>默认网关：只是在路由表里添加一条不认识的 IP 直接发给它的路由表项而已，所以不填也行，只是就不能上网了（算是网络进出的门口）</p>
-<h3 id="ARP表："><a href="#ARP表：" class="headerlink" title="ARP表："></a>ARP表：</h3><p>把MAC和IP地址对应起来的表</p>
-<ul>
-<li>ARP请求：“请告诉我 172.18.187.254 这个 IP 对应的 MAC 地址是多少”（源：自己MAC，目标：FF-FF-FF-FF-FF-FF）</li>
-<li>ARP回应：目标电脑看到了回“172.18.187.254 在 e4-a8-b6-96-6f-83”</li>
-</ul>
-<h3 id="单播、组播与广播"><a href="#单播、组播与广播" class="headerlink" title="单播、组播与广播"></a>单播、组播与广播</h3><ul>
-<li>单播：一次和一台主机进行通信</li>
-<li>广播：地址就是主机号二进制位全为 1 的 IP 地址，操作系统会自动填上 MAC 地址 FF-FF-FF-FF-FF-FF 广播出去</li>
-<li><strong>组播</strong>：地址为 224.0.0.0&#x2F;4，操作系统会自动生成 01-xx-xx-xx-xx-xx 的组播地址发送到局域网内。组播就像微信群聊，谁往组播地址发东西，整个群的人都会收到，但没加群的人收不到。</li>
-</ul>
-<p>在一个没有内部 DNS 的网络里，我们想通过主机名和局域网里其他主机通信会用到组播和mDNS</p>
-<h3 id="传输层（进程，TCP-UDP协议在这一层）"><a href="#传输层（进程，TCP-UDP协议在这一层）" class="headerlink" title="传输层（进程，TCP&#x2F;UDP协议在这一层）"></a>传输层（进程，TCP&#x2F;UDP协议在这一层）</h3><blockquote>
-<p>链路层通过 MAC 地址标识网口，网络层通过 IP 标识设备，而传输层通过端口号来标识进程(差不多到操作系统的层面了）。</p>
-</blockquote>
-<ul>
-<li><p>UDP: 对 IP 的一个简单封装，相当于在 IP 包上加了端口号，表现的特性跟 IP 是一样，都是不可靠的、尽力而为（Best Effort）的</p>
-</li>
-<li><p>TCP：通过建立虚拟连接的方式，在不可靠的 IP 网上提供了可靠的传输服务。（错误可以及时通知对方）</p>
-<ul>
-<li>![](Pasted image 20250331091644.png)</li>
-<li>三次握手与四次挥手  </li>
-<li>![](Pasted image 20250326141104.png)</li>
-<li>![](Pasted image 20250326141115.png)</li>
-<li>收发双方共同维护一段窗口，用来暂存数据包。发送方的发送窗口存的是发送了但是没有确认的数据包，接收方的接收窗口用来存放乱序的数据包或者是还没来得及交给上层处理的数据包。</li>
-<li>收发数据时发送方会对数据标序号，以便判断与触发重传机制（可靠吧~）</li>
-<li>TCP <strong>没有</strong>显式重传的机制（接收方<strong>不能主动</strong>要求对方重传某一段数据）</li>
-</ul>
-</li>
-</ul>
-<h3 id="应用层（HTTP-HTTPS-FTP-TFTP-等协议在这一层）"><a href="#应用层（HTTP-HTTPS-FTP-TFTP-等协议在这一层）" class="headerlink" title="应用层（HTTP&#x2F;HTTPS&#x2F;FTP&#x2F;TFTP 等协议在这一层）"></a>应用层（HTTP&#x2F;HTTPS&#x2F;FTP&#x2F;TFTP 等协议在这一层）</h3><ul>
-<li>TFTP（Trivial FTP）：基于 UDP 的文件传输协议，采用<strong>停等协议</strong>（发送一个数据包，等到对方回复确认收到了之后才会继续发送下一个数据包。）优点是实现简单，缺点是浪费带宽。适合在没有操作系统与嵌入式设备进行传输</li>
-<li>正向代理（Shadowsocks，V2Ray，Clash）：用来使防火墙内部的客户端，连接到防火墙外部，对外隐藏客户端真实 IP，也即对客户端请求做 SNAT，请求目的地址不变，一般不解析应用协议，而是直接转发 TCP&#x2F;UDP 流量。</li>
-<li>反向代理（nginx、HAProxy ）用来使防火墙外部的客户端，连接到防火墙内部服务器，对外隐藏服务器真实 IP，也即对客户端请求做 DNAT，请求源地址不变，通常会解析应用层协议并做进一步转发判断处理。对于 TLS 连接，是由反向代理提供证书的。</li>
-<li>HTTP: 用于传输超文本（如网页、图片、视频等）的<strong>核心通信协议</strong>。它定义了客户端（如浏览器）和服务器之间如何交换数据,又是一个超级巨无霸的知识点，可能会再开一篇聊聊</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>hexo建站小记</title>
     <url>/2025/03/13/new-step/</url>
     <content><![CDATA[<p>之前有尝试使用过白嫖阿里云服务器部署WordPress，用宝塔面板部署镜像等等，但那个时候对于网络前后端啥的一无所知，现在学了一点点知识了，就用这个建站当实践吧</p>
@@ -204,5 +128,114 @@
       <tags>
         <tag>new start</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>计网扫盲与速通</title>
+    <url>/2025/04/03/network/</url>
+    <content><![CDATA[<p>先祭出七层和五层模型:</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/network/1.jpg"
+                     
+                ></p>
+<h2 id="物理层（网线与电子元件在这一层）"><a href="#物理层（网线与电子元件在这一层）" class="headerlink" title="物理层（网线与电子元件在这一层）"></a>物理层（网线与电子元件在这一层）</h2><p>通用有线网网卡插口为RJ45，连接线为双绞线</p>
+<ul>
+<li>交叉线：相同类型设备连接，线序不同，一端水晶头为 568A 另一端为 568B（568B 线序：橙白&#x2F;橙&#x2F;绿白&#x2F;蓝&#x2F;蓝白&#x2F;绿&#x2F;棕白&#x2F;棕</li>
+<li>直通线：不同类型设备连接，两端都是568B<br>类型分类：CAT 1-7；CAT 5：100Mbits&#x2F;s（百兆线）;CAT6:1000Mbits&#x2F;s（千兆线）CAT-7：10000Mbits&#x2F;s</li>
+</ul>
+<h2 id="链路层（网口，MAC在这一层）"><a href="#链路层（网口，MAC在这一层）" class="headerlink" title="链路层（网口，MAC在这一层）"></a>链路层（网口，MAC在这一层）</h2><p>传输数据为以太网帧</p>
+<blockquote>
+<p>一帧会以一系列规定好的前导比特序列开始，用来告知一帧的开始和同步通信双方速率（可以理解成同步时钟）。之后就是以太网帧的正式内容。<br><strong>注意，在链路上的所有计算机都可以侦听到传输的以太网帧</strong></p>
+</blockquote>
+<p>MAC地址（xx:xx:xx:xx:xx:xx）：用来确定数据是否发给自己的,如果不是就丢弃，否则就接收，并将数据存放到缓冲区，或者 DMA 到内存中，并发出一个<strong>硬件中断</strong>通知 CPU 自己收到了数据</p>
+<ul>
+<li><strong>广播地址</strong>：FF:FF:FF:FF:FF:FF</li>
+<li><strong>组播地址</strong>：01:xx:xx:xx:xx:xx<br>  这俩接受到都会认为是发送给自己的，具体区别网络层再说</li>
+</ul>
+<p><strong>MAC 地址是在链路层中寻址的根据。</strong><br>交换机如何知道哪个端口是哪个 MAC 地址：<strong>MAC 地址表</strong>（记录地址&lt;&#x3D;&#x3D;&gt;物理网口，有自学习机制，可以记录数据帧与端口的对应）</p>
+<p><strong>广播风暴</strong>：若多个交换机形成环路会引发广播风暴，要配置<strong>生成树</strong>协议避免环路形成（图论最有用的一集）</p>
+<h2 id="网络层（主机，IP协议在这一层）"><a href="#网络层（主机，IP协议在这一层）" class="headerlink" title="网络层（主机，IP协议在这一层）"></a>网络层（主机，IP协议在这一层）</h2><p>为什么需要IP：互相通信的两个网口，可能在链路层上没有直接连接到一起，这时候就需要另外一层协议来连接这些不同的<strong>子网</strong>（链路层上可以直接互相通信的网络），可以使用tcpdump来抓包。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/network/2.png"
+                     
+                ><br><strong>子网掩码</strong>：<strong>子网掩码</strong>中二进制位为 1 代表对应的地址中的位为<strong>网络号</strong>，为 0 代表对应的地址中的位为<strong>主机号。</strong> 由前半段连续的1与后半段连续的0组成，<strong>1之前不能出现0</strong>，他定义了一个子网里可以有多少机器。</p>
+<blockquote>
+<p>例：255.255.255.0&lt;&#x3D;&#x3D;&gt;11111111.11111111.11111111.00000000<br>子网的网络号有 24 位长，主机号有 8 位长，可以放下 256 - 2 &#x3D; 254 台主机<br>对于IP：192.168.1.233 255.255.255.0 可以写成 192.168.1.233&#x2F;24，后面的 24 意思是子网掩码前 24 位是 1 后面全 0。这种方法叫 CIDR 表示法。</p>
+</blockquote>
+<p>不同的程序进行通信需要使用端口号来进行识别，如果说IP是房子那么端口就是房子的门，由 Internet 端口号分配机构（Internet Assigned Numbers Authority，IANA）来管理，编号 0 ～ 1023 为 <strong>系统端口号</strong>（系统保留）,编号 1024 ～ 49151 为<strong>登记端口号</strong>(登记使用），编号 49152 ～ 65535 为<strong>短暂端口号</strong>（短暂使用，用完释放）常见的端口即协议对应按照下面展示：</p>
+<ul>
+<li>SSH 22</li>
+<li>FTP 20 和 21</li>
+<li>Telnet 23</li>
+<li>SMTP 25</li>
+<li>TFTP 69</li>
+<li>HTTP 80</li>
+<li>SNMP 161</li>
+<li>Ping 使用 ICMP，无具体端口号</li>
+</ul>
+<p>接下来对于网络通信非常重要的两个表</p>
+<h3 id="路由表"><a href="#路由表" class="headerlink" title="路由表"></a>路由表</h3><p>准备发送 IP 包的时候，会去查询路由表，长下面这样子：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/network/3.png"
+                     
+                ></p>
+<p>传送路径：查路由表&#x3D;&#x3D;&gt;匹配后看下一跳&#x3D;&#x3D;&gt;如果是在链路上&#x2F;onlink（同一子网）：直接发局域网后转发；如果是IP地址：封装一个目的 IP 是原来的目的地址的 IP 包，下一跳 IP 设备对应的 MAC 地址的以太网帧，发送到局域网内（这就是路由）&#x3D;&#x3D;&gt;到下一跳后重复执行</p>
+<p>默认网关：只是在路由表里添加一条不认识的 IP 直接发给它的路由表项而已，所以不填也行，只是就不能上网了（算是网络进出的门口）</p>
+<h3 id="ARP表："><a href="#ARP表：" class="headerlink" title="ARP表："></a>ARP表：</h3><p>把MAC和IP地址对应起来的表</p>
+<ul>
+<li>ARP请求：“请告诉我 172.18.187.254 这个 IP 对应的 MAC 地址是多少”（源：自己MAC，目标：FF-FF-FF-FF-FF-FF）</li>
+<li>ARP回应：目标电脑看到了回“172.18.187.254 在 e4-a8-b6-96-6f-83”</li>
+</ul>
+<h3 id="单播、组播与广播"><a href="#单播、组播与广播" class="headerlink" title="单播、组播与广播"></a>单播、组播与广播</h3><ul>
+<li>单播：一次和一台主机进行通信</li>
+<li>广播：地址就是主机号二进制位全为 1 的 IP 地址，操作系统会自动填上 MAC 地址 FF-FF-FF-FF-FF-FF 广播出去</li>
+<li><strong>组播</strong>：地址为 224.0.0.0&#x2F;4，操作系统会自动生成 01-xx-xx-xx-xx-xx 的组播地址发送到局域网内。组播就像微信群聊，谁往组播地址发东西，整个群的人都会收到，但没加群的人收不到。</li>
+</ul>
+<p>在一个没有内部 DNS 的网络里，我们想通过主机名和局域网里其他主机通信会用到组播和mDNS</p>
+<h3 id="传输层（进程，TCP-UDP协议在这一层）"><a href="#传输层（进程，TCP-UDP协议在这一层）" class="headerlink" title="传输层（进程，TCP&#x2F;UDP协议在这一层）"></a>传输层（进程，TCP&#x2F;UDP协议在这一层）</h3><blockquote>
+<p>链路层通过 MAC 地址标识网口，网络层通过 IP 标识设备，而传输层通过端口号来标识进程(差不多到操作系统的层面了）。</p>
+</blockquote>
+<ul>
+<li><p>UDP: 对 IP 的一个简单封装，相当于在 IP 包上加了端口号，表现的特性跟 IP 是一样，都是不可靠的、尽力而为（Best Effort）的</p>
+</li>
+<li><p>TCP：通过建立虚拟连接的方式，在不可靠的 IP 网上提供了可靠的传输服务。（错误可以及时通知对方）</p>
+<ul>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/network/4.png"
+                     
+                ></li>
+<li>三次握手与四次挥手  </li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/network/5.png"
+                     
+                ></li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/network/6.png"
+                     
+                ></li>
+<li>收发双方共同维护一段窗口，用来暂存数据包。发送方的发送窗口存的是发送了但是没有确认的数据包，接收方的接收窗口用来存放乱序的数据包或者是还没来得及交给上层处理的数据包。</li>
+<li>收发数据时发送方会对数据标序号，以便判断与触发重传机制（可靠吧~）</li>
+<li>TCP <strong>没有</strong>显式重传的机制（接收方<strong>不能主动</strong>要求对方重传某一段数据）</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用层（HTTP-HTTPS-FTP-TFTP-等协议在这一层）"><a href="#应用层（HTTP-HTTPS-FTP-TFTP-等协议在这一层）" class="headerlink" title="应用层（HTTP&#x2F;HTTPS&#x2F;FTP&#x2F;TFTP 等协议在这一层）"></a>应用层（HTTP&#x2F;HTTPS&#x2F;FTP&#x2F;TFTP 等协议在这一层）</h3><ul>
+<li>TFTP（Trivial FTP）：基于 UDP 的文件传输协议，采用<strong>停等协议</strong>（发送一个数据包，等到对方回复确认收到了之后才会继续发送下一个数据包。）优点是实现简单，缺点是浪费带宽。适合在没有操作系统与嵌入式设备进行传输</li>
+<li>正向代理（Shadowsocks，V2Ray，Clash）：用来使防火墙内部的客户端，连接到防火墙外部，对外隐藏客户端真实 IP，也即对客户端请求做 SNAT，请求目的地址不变，一般不解析应用协议，而是直接转发 TCP&#x2F;UDP 流量。</li>
+<li>反向代理（nginx、HAProxy ）用来使防火墙外部的客户端，连接到防火墙内部服务器，对外隐藏服务器真实 IP，也即对客户端请求做 DNAT，请求源地址不变，通常会解析应用层协议并做进一步转发判断处理。对于 TLS 连接，是由反向代理提供证书的。</li>
+<li>HTTP: 用于传输超文本（如网页、图片、视频等）的<strong>核心通信协议</strong>。它定义了客户端（如浏览器）和服务器之间如何交换数据,又是一个超级巨无霸的知识点，可能会再开一篇聊聊</li>
+</ul>
+]]></content>
   </entry>
 </search>
